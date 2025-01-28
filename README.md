@@ -3,6 +3,8 @@
 ## Overview
 This project displays student grades and averages in a dashboard. The dashboard fetches data from a Django API.
 
+![screenshot](https://github.com/user-attachments/assets/26be6e76-e8d7-4866-9c94-d8bf0dd9bff9)
+
 ## How to Run
 
 1. **Start the Django API:**
