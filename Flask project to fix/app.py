@@ -26,7 +26,7 @@ def dashboard():
         for student_id, grades in student_grades.items()
     }
 
-    # Create the final data structure for the template
+    # Create the student data structure for the template
     student_data = [
         {
             "name": next(student['name'] for student in students if student['id'] == student_id),
@@ -38,7 +38,22 @@ def dashboard():
     # Sort students by average grade for ranking
     student_data.sort(key=lambda x: x['average'], reverse=True)
 
-    return render_template("dashboard.html", students=student_data, subjects=subjects)
+    # Organize subject data with grades for the template
+    subject_data = []
+    for subject in subjects:
+        subject_grades = [
+            {
+                "student_name": next(student['name'] for student in students if student['id'] == grade['student']),
+                "grade": grade['grade']
+            }
+            for grade in grades if grade['subject'] == subject['id']
+        ]
+        subject_data.append({
+            "name": subject['name'],
+            "grades": subject_grades
+        })
+
+    return render_template("dashboard.html", students=student_data, subjects=subject_data)
 
 if __name__ == "__main__":
     app.run(debug=True)

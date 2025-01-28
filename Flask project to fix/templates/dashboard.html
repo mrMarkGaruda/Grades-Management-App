@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Student Dashboard</h1>
+
+        <!-- Student Averages -->
         <h2>Student Averages</h2>
         <table class="table table-striped">
             <thead class="thead-dark">
@@ -30,12 +31,26 @@
             </tbody>
         </table>
 
+        <!-- Subjects and Grades -->
         <h2>Subjects</h2>
-        <ul class="list-group">
+        <div class="row">
             {% for subject in subjects %}
-            <li class="list-group-item">{{ subject.name }}</li>
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title">{{ subject.name }}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for grade in subject.grades %}
+                        <li class="list-group-item">
+                            <strong>{{ grade.student_name }}</strong>: {{ grade.grade }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
             {% endfor %}
-        </ul>
+        </div>
     </div>
 </body>
 </html>
